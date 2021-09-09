@@ -47,7 +47,7 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         vGap = 50;
-        radius = 15;
+        radius = 20;
 
 
     }
@@ -87,8 +87,8 @@ public  void drawn(){
     Stack<model.Node<String>> s = new Stack<>();
     //((((3 + 1) * 3) /((9 - 5) + 2)) - ((3 * (7 - 4)) + 6))
     String expresion = pantallaUno.getText();
-    String a = "3 1 + 3 * 9 5 - 2 + / 7 4 - 3 * 6 + -";
-//    String a = String.valueOf(Conversion.conversionPostfijo(expresion) );
+//    String a = "3 1 + 3 * 9 5 - 2 + / 7 4 - 3 * 6 + -";
+    String a = "34 1 + 35 * 9 58 - 2 + / 8 / 6 +";
 //        String a = "3 1 +";
 //    String a = expresion();
     System.out.println();
