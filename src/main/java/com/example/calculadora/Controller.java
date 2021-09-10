@@ -48,7 +48,7 @@ public class Controller implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         vGap = 50;
         radius = 20;
-
+        dec();
 
     }
     private void displayAVLTree(model.Node<String> root,
@@ -88,7 +88,20 @@ public  void drawn(){
     //((((3 + 1) * 3) /((9 - 5) + 2)) - ((3 * (7 - 4)) + 6))
     String expresion = pantallaUno.getText();
 //    String a = "3 1 + 3 * 9 5 - 2 + / 7 4 - 3 * 6 + -";
-    String a = "34 1 + 35 * 9 58 - 2 + / 8 / 6 +";
+    String a = pantallaUno.getText();
+    ControlConversion conversion = new ControlConversion(a);
+    try {
+        if(!conversion.veroficacionParentecis()) throw new Error("Parentecis erros");
+       Conversion.conversionPostfijo(conversion.generarEspacios()).toString();
+    } catch (Error e) {
+        e.printStackTrace();
+    }
+    try {
+       a=conversion.reducirEspacios();
+    } catch (Error e) {
+        e.printStackTrace();
+    }
+
 //        String a = "3 1 +";
 //    String a = expresion();
     System.out.println();
@@ -100,6 +113,7 @@ public  void drawn(){
     tree.createTree();
     tree.getRoot();
     displayAVLTree(tree.getRoot(), 400, 100, 200);
+    PantallaDos.setText(Double.toString(tree.operate()));
 }
     public String symbol(String sym){
         if(sym.equalsIgnoreCase("/"))return "÷";
@@ -110,7 +124,11 @@ public  void drawn(){
 
     public String expresion(){
         String a = "";
-        a = Conversion.conversionPostfijo(pantallaUno.getText());
+        try {
+            a = Conversion.conversionPostfijo(pantallaUno.getText());
+        } catch (Error ex) {
+            ex.printStackTrace();
+        }
         if(a.length()>1)a= a.substring(1,a.length());
         System.out.println(a);
         return a;
