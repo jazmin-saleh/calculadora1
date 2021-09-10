@@ -51,8 +51,7 @@ public class Controller implements Initializable {
         dec();
 
     }
-    private void displayAVLTree(model.Node<String> root,
-                                double x, double y, double hGap) {
+    private void displayAVLTree(model.Node<String> root, double x, double y, double hGap) {
 
         if (root.getLeft() != null) {
             // Draw a line to the left node
@@ -82,6 +81,7 @@ public class Controller implements Initializable {
         tree.getChildren().addAll(circle, texto);
     }
 public  void drawn(){
+        PantallaDos.setText(" ");
         expresion();
     tree.getChildren().clear();
     Stack<model.Node<String>> s = new Stack<>();
@@ -113,7 +113,12 @@ public  void drawn(){
     tree.createTree();
     tree.getRoot();
     displayAVLTree(tree.getRoot(), 400, 100, 200);
-    PantallaDos.setText(Double.toString(tree.operate()));
+    try {
+        PantallaDos.setText(Double.toString(tree.operate()));
+    }catch (Exception e){
+       PantallaDos.setText("SYNTAX ERROR");
+    }
+
 }
     public String symbol(String sym){
         if(sym.equalsIgnoreCase("/"))return "÷";

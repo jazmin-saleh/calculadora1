@@ -38,7 +38,7 @@ public class Tree<T> {
 
     public double operate() {
         Stack<Node<T>> pilaCopy = (Stack<Node<T>>) pila.clone();
-        pilaCopy.removeIf(tNode->tNode.getRight() == null || tNode.getLeft() == null);
+        //pilaCopy.removeIf(tNode->tNode.getRight() == null || tNode.getLeft() == null);
         for (Node<T> tNode : pilaCopy) {
             if (!isOperand(tNode.getLeft().getInfo()) && !isOperand(tNode.getRight().getInfo())) {
                 tNode.setInfo((T) Double.toString(operation(tNode, tNode.getLeft(), tNode.getRight())));
@@ -56,6 +56,9 @@ public class Tree<T> {
             case '/':
                 return Double.parseDouble(left.getInfo().toString()) / Double.parseDouble(right.getInfo().toString());
             case '-':
+                if (left.getInfo()==null){
+                    return -1*Double.parseDouble(right.getInfo().toString());
+                }
                 return Double.parseDouble(left.getInfo().toString()) - Double.parseDouble(right.getInfo().toString());
             case '+':
                 return Double.parseDouble(left.getInfo().toString()) + Double.parseDouble(right.getInfo().toString());
